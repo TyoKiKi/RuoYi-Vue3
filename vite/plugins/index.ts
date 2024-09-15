@@ -3,23 +3,18 @@ import type { Plugin } from 'vite'
 
 // Import functions with inferred or defined types
 import createAutoImport from './auto-import'
-import createSvgIcon from './svg-iocn'
+import createSvgIcon from './svg-icon'
 import createCompression from './compression'
-import createSetupExtend from './setup-extend'
+// import createSetupExtend from './setup-extend'
 
-// Define types for the function parameters
-interface ViteEnv {
-  // Define the properties of ViteEnv if known
-  [key: string]: any
-}
 
-export default function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean = false): Plugin[] {
+export default function createVitePlugins(viteEnv: string, isBuild: boolean = false) {
   // Initialize the Vite plugins array
   const vitePlugins: Plugin[] = [vue()]
 
   // Add plugins to the array
   vitePlugins.push(createAutoImport())
-  vitePlugins.push(createSetupExtend())
+  // vitePlugins.push(createSetupExtend() as Plugin)
   vitePlugins.push(createSvgIcon(isBuild))
 
   // Conditionally add compression plugin if isBuild is true
